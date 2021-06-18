@@ -63,5 +63,24 @@ fetch(dataUrl)
 				event.preventDefault();
 				modalButton.parentNode.parentNode.classList.remove('active');
 			});
-		});					
+		});		
+		
+		// Search Characters Component
+		let searchInput = document.querySelector('.search-input');
+		let characters = document.querySelectorAll('.character');
+		
+		searchInput.addEventListener('keyup', (event) => {
+			let query = event.target.value.toLowerCase();
+			characters.forEach((character) => {
+				character.querySelector('h5').textContent.toLowerCase().startsWith(query) ? character.parentElement.style.display = 'block' : character.parentElement.style.display = 'none';
+			});
+		});			
+	})
+	.catch(error => {
+		let charList = document.querySelector('.character-list');
+		let errorElement = document.createElement('h4');
+		
+		charList.insertAdjacentElement('afterend', errorElement);
+		errorElement.style.textAlign = 'center';
+		errorElement.innerHTML = 'An error has occured, please try realoding the page';
 	});
